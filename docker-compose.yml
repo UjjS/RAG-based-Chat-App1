@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant_db
+    ports:
+      - "6333:6333" # REST API
+      - "6334:6334" # gRPC
+    volumes:
+      - ./qdrant_storage:/qdrant/storage # Persists the vector data on your host machine
+
+  app:
+    build: .
+    container_name: rag_chat_app
+    ports:
+      - "8501:8501" # Expose Streamlit's default port
+    depends_on:
+      - qdrant # Ensures qdrant starts before our app
+    env_file:
+      - .env # Loads environment variables from a .env file
+    volumes:
+      - ./:/app # Mounts the current directory into the container for live code changes
