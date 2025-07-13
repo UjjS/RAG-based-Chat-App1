@@ -12,4 +12,3 @@ You provide a URL, the application scrapes its content, indexes it into a vector
 - **Containerized**: Easy to set up and run using Docker and Docker Compose.
 - **Persistent Storage**: Vector data is saved to a local volume, so it persists across container restarts.
 
-## Project Structure
